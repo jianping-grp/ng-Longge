@@ -1,0 +1,193 @@
+<form nz-form class="form" [formGroup]="stepTwoForm" (ngSubmit)="onSubmit()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="8" nzRequired>Job Name</nz-form-label>
+    <nz-form-control [nzSpan]="8">
+      <input nz-input formControlName="job_name" placeholder="same as the first time">
+      <nz-form-explain *ngIf="stepTwoForm.get('job_name').dirty&&stepTwoForm.get('job_name').hasError('required')">
+        please input job name!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="8" nzRequired>cat_ID</nz-form-label>
+    <nz-form-control [nzSpan]="8">
+      <input nz-input formControlName="cat_ID">
+      <nz-form-explain *ngIf="stepTwoForm.get('cat_ID').dirty&&stepTwoForm.get('cat_ID').hasError('required')">
+        please input cat_ID!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <!--Array Form-->
+  <div formArrayName="constrain_info">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>constrain_info</nz-form-label>
+      <nz-form-control [nzSpan]="8">
+        <span>Complex renumber pdb Atoms information.</span>
+      </nz-form-control>
+    </nz-form-item>
+    <!--add and remove constrain-->
+    <nz-form-item>
+      <nz-form-control [nzSpan]="8" [nzOffset]="9">
+        <button nz-button type="button" [nzType]="'primary'" (click)="addConstrain()">AddConstrain</button>&nbsp;&nbsp;
+        <button nz-button type="button" [nzType]="'primary'" (click)="removeConstrain()">RemoveConstrain</button>
+      </nz-form-control>
+    </nz-form-item>
+    <!--constrain form list-->
+    <div nz-row *ngFor="let constrain of constrainInfo.controls; let i = index" [formGroupName]="i">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" [nzOffset]="5">Group {{i + 1}}</nz-form-label>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="8" nzRequired>Atom_type</nz-form-label>
+        <nz-form-control [nzSpan]="8">
+          <nz-input-group [nzAddOnBefore]="typeTemplate">
+            <ng-template #typeTemplate>
+              <nz-select formControlName="atom_type_prefix" #atom style="width: 90px;">
+                <nz-option nzLabel="type1" nzValue="type1"></nz-option>
+                <nz-option nzLabel="type2" nzValue="type2"></nz-option>
+              </nz-select>
+            </ng-template>
+            <input nz-input *ngIf="constrain.get('atom_type_prefix').value === 'type1'" formControlName="Atom_type" placeholder="OH">
+            <input nz-input *ngIf="constrain.get('atom_type_prefix').value === 'type2'" formControlName="atom_A1" class="group-input-first" placeholder="OOB">
+            <input nz-input *ngIf="constrain.get('atom_type_prefix').value === 'type2'" formControlName="atom_A2" class="group-input" placeholder="PB3">
+            <input nz-input *ngIf="constrain.get('atom_type_prefix').value === 'type2'" formControlName="atom_A3" class="group-input" placeholder="OOA">
+          </nz-input-group>
+          <!--atom type === type1 and value is null-->
+          <nz-form-explain *ngIf="constrain.get('atom_type_prefix').value === 'type1'&&(constrain.get('Atom_type').dirty&&!constrain.get('Atom_type').value)">
+            <p class="input-explain-color">please input Atom type!</p>
+          </nz-form-explain>
+          <!--atom type === type2 and value is null-->
+          <nz-form-explain *ngIf="constrain.get('atom_type_prefix').value === 'type2'&&((constrain.get('atom_A1').dirty&&!constrain.get('atom_A1').value)
+      || (constrain.get('atom_A2').dirty&&!constrain.get('atom_A2').value)
+      || (constrain.get('atom_A3').dirty&&!constrain.get('atom_A3').value))">
+            <p class="input-explain-color">please input Atom type!</p>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="10" nzRequired>CST_A_chain_name</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="CST_A_chain_name">
+            <nz-form-explain
+              *ngIf="constrain.get('CST_A_chain_name').dirty&&constrain.get('CST_A_chain_name').hasError('required')">
+              please input CST_A_chian_name!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="10" nzRequired>CST_A_residue_ID</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="CST_A_residue_ID">
+            <nz-form-explain
+              *ngIf="constrain.get('CST_A_residue_ID').dirty&&constrain.get('CST_A_residue_ID').hasError('required')">
+              please input CST_A_residue_ID!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="10" nzRequired>CST_A_residue_name</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="CST_A_residue_name">
+            <nz-form-explain
+              *ngIf="constrain.get('CST_A_residue_name').dirty&&constrain.get('CST_A_residue_name').hasError('required')">
+              please input CST_A_residue_Name!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="10" nzRequired>Atom_A1</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="Atom_A1">
+            <nz-form-explain *ngIf="constrain.get('Atom_A1').dirty&&constrain.get('Atom_A1').hasError('required')">
+              please input Atom_A1!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="10" nzRequired>Atom_A2</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="Atom_A2">
+            <nz-form-explain *ngIf="constrain.get('Atom_A2').dirty&&constrain.get('Atom_A2').hasError('required')">
+              please input Atom_A2!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="10" nzRequired>Atom_A3</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="Atom_A3">
+            <nz-form-explain *ngIf="constrain.get('Atom_A3').dirty&&constrain.get('Atom_A3').hasError('required')">
+              please input Atom_A3!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>CST_B_chain_name</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="CST_B_chain_name">
+            <nz-form-explain
+              *ngIf="constrain.get('CST_B_chain_name').dirty&&constrain.get('CST_B_chain_name').hasError('required')">
+              please input CST_B_chian_name!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>CST_B_residue_ID</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="CST_B_residue_ID">
+            <nz-form-explain
+              *ngIf="constrain.get('CST_B_residue_ID').dirty&&constrain.get('CST_B_residue_ID').hasError('required')">
+              please input CST_B_residue_ID!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>CST_B_residue_name</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="CST_B_residue_name">
+            <nz-form-explain
+              *ngIf="constrain.get('CST_B_residue_name').dirty&&constrain.get('CST_B_residue_name').hasError('required')">
+              please input CST_B_residue_Name!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>Atom_B1</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="Atom_B1">
+            <nz-form-explain *ngIf="constrain.get('Atom_B1').dirty&&constrain.get('Atom_B1').hasError('required')">
+              please input Atom_B1!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>Atom_B2</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="Atom_B2">
+            <nz-form-explain *ngIf="constrain.get('Atom_B2').dirty&&constrain.get('Atom_B2').hasError('required')">
+              please input Atom_B2!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>Atom_B3</nz-form-label>
+          <nz-form-control [nzSpan]="11">
+            <input nz-input formControlName="Atom_B3">
+            <nz-form-explain *ngIf="constrain.get('Atom_B3').dirty&&constrain.get('Atom_B3').hasError('required')">
+              please input Atom_B3!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </div>
+
+  <nz-form-item>
+    <nz-form-control [nzSpan]="8" [nzOffset]="10">
+      <button nz-button [nzType]="'primary'">Submit</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
