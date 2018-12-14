@@ -14,6 +14,7 @@ export class OnlineDockingComponent implements OnInit {
   formData = new FormData();
   fileReadResult: any;
   mutation: any;
+  searchJobName: string;
   constructor(private rest: RestService,
               private fb: FormBuilder,
               private router: Router) {
@@ -134,6 +135,16 @@ export class OnlineDockingComponent implements OnInit {
         () => {
           this.router.navigate(['./home']);
         });
+  }
+
+
+  gotoResult(): void {
+    console.log(this.searchJobName);
+    this.router.navigate(['mut-analysis/analysis-result'], {
+      queryParams: {
+        jobName: this.searchJobName
+      }
+    });
   }
 
 

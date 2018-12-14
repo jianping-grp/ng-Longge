@@ -8,7 +8,7 @@ const routes: Routes = [
     component: OnlineDockingComponent
   },
   {
-    path: 'analysis',
+    path: 'analysis-result',
     component: DockResultComponent
   }
   ];
