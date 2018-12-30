@@ -12,7 +12,6 @@ import {Router} from '@angular/router';
 export class StepFiveComponent implements OnInit {
   stepFiveForm: FormGroup;
   setParams: any;
-  formData = new FormData();
   paramsFileList: ParamsFile;
   constructor(private rest: RestService,
               private fb: FormBuilder,
@@ -62,15 +61,16 @@ export class StepFiveComponent implements OnInit {
 
   uploadForm() {
     const form = this.stepFiveForm.value;
+    const formData = new FormData();
     const analysisParamsArray = [];
     for (const analysis of form.analysis_params) {
       analysisParamsArray.push( `req ${analysis['params'].trim()}`);
     }
     const analysisParamsValue = analysisParamsArray.join(';') + ';output' + form.output_params.trim();
-    this.formData.append('job_name', form.job_name);
-    this.formData.append('analysis_params', analysisParamsValue);
+    formData.append('job_name', form.job_name);
+    formData.append('analysis_params', analysisParamsValue);
 
-    this.rest.postData('fifth-step/', this.formData)
+    this.rest.postData('fifth-step/', formData)
       .subscribe(data => {
           this.paramsFileList = data;
           alert('Submitted Successfully!');

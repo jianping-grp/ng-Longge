@@ -12,7 +12,6 @@ import {GlobalService} from '../../../../service/global/global.service';
 export class StepFourComponent implements OnInit {
   stepFourForm: FormGroup;
   cstFile: File;
-  formData = new FormData();
   constructor(private rest: RestService,
               private fb: FormBuilder,
               private router: Router,
@@ -62,14 +61,15 @@ export class StepFourComponent implements OnInit {
   // 处理表单数据个格式，并上传文件
   uploadForm() {
     const form = this.stepFourForm.value;
+    const formData = new FormData();
     const designRange = form.range1.trim() + ';' + form.range2.trim() + ';' + form.range3.trim() + ';'
       + form.range4.trim() + ';' + form.range5.trim();
-    this.formData.append('job_name', form.job_name.trim());
-    this.formData.append('design_mini_range', designRange);
-    this.formData.append('user_email', form.user_email.trim());
-    this.formData.append('design_cst', this.cstFile);
+    formData.append('job_name', form.job_name.trim());
+    formData.append('design_mini_range', designRange);
+    formData.append('user_email', form.user_email.trim());
+    formData.append('design_cst', this.cstFile);
 
-    this.rest.postData('fourth-step/', this.formData)
+    this.rest.postData('fourth-step/', formData)
       .subscribe(data => {
           // console.log(data);
           alert('Submitted Successfully! Please receive the email ' +

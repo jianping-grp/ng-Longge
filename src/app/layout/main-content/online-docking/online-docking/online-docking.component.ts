@@ -11,7 +11,6 @@ import {Router} from '@angular/router';
 export class OnlineDockingComponent implements OnInit {
   dockingForm: FormGroup;
   proteinFile: File;
-  formData = new FormData();
   fileReadResult: any;
   mutation: any;
   searchJobName: string;
@@ -103,6 +102,7 @@ export class OnlineDockingComponent implements OnInit {
 
   uploadForm() {
     const form  = this.dockingForm.value;
+    const formData = new FormData();
     const mutationInfoArray = [];
     for (const mutation of form.mutation_info_list) {
       mutationInfoArray.push(
@@ -112,18 +112,18 @@ export class OnlineDockingComponent implements OnInit {
       );
     }
     const mutationInfoValue = '[' +  mutationInfoArray.join(',') + ']';
-    this.formData.append('job_name', form.job_name);
-    this.formData.append('email_addr', form.user_email);
-    this.formData.append('mutation_radius', form.mutation_radius);
-    this.formData.append('pov_radius', form.pov_radius);
-    this.formData.append('pH', form.pH);
-    this.formData.append('ligand_name', form.ligand_name);
-    this.formData.append('ligand_resseq', form.ligand_resseq);
-    this.formData.append('chain_id', form.chain_id);
-    this.formData.append('mutation_info_list', mutationInfoValue);
-    this.formData.append('protein_file', this.proteinFile);
-    console.log('onlineData:', this.formData, this.dockingForm.value);
-    this.rest.postData('online-dock/', this.formData)
+    formData.append('job_name', form.job_name);
+    formData.append('email_addr', form.user_email);
+    formData.append('mutation_radius', form.mutation_radius);
+    formData.append('pov_radius', form.pov_radius);
+    formData.append('pH', form.pH);
+    formData.append('ligand_name', form.ligand_name);
+    formData.append('ligand_resseq', form.ligand_resseq);
+    formData.append('chain_id', form.chain_id);
+    formData.append('mutation_info_list', mutationInfoValue);
+    formData.append('protein_file', this.proteinFile);
+    console.log('onlineData:', formData, this.dockingForm.value);
+    this.rest.postData('online-dock/', formData)
       .subscribe(data => {
           console.log(data);
           alert('Submitted Successfully! The result will be sent to your email.');

@@ -11,7 +11,6 @@ import {Router} from '@angular/router';
 })
 export class StepTwoComponent implements OnInit {
   stepTwoForm: FormGroup;
-  formData = new FormData();
   paramsFileList: ParamsFile;
   constrain: any;
   constructor(private rest: RestService,
@@ -92,6 +91,7 @@ export class StepTwoComponent implements OnInit {
 
   uploadForm() {
     const form = this.stepTwoForm.value;
+    const formData = new FormData();
     let constrainValue = '';
     // constrain_info 数据格式处理
     for (const constrain of form.constrain_info) {
@@ -124,10 +124,10 @@ export class StepTwoComponent implements OnInit {
     // 移除最后一个冒号
     constrainValue = constrainValue.slice(0, -1);
     console.log('constrainValue:', constrainValue);
-    this.formData.append('job_name', form.job_name.trim());
-    this.formData.append('cat_ID', form.cat_ID.trim());
-    this.formData.append('constrain_info', constrainValue);
-    this.rest.postData('second-step/', this.formData)
+    formData.append('job_name', form.job_name.trim());
+    formData.append('cat_ID', form.cat_ID.trim());
+    formData.append('constrain_info', constrainValue);
+    this.rest.postData('second-step/', formData)
       .subscribe(data => {
         // this.paramsFileList = data;
           alert('Submitted Successfully!');

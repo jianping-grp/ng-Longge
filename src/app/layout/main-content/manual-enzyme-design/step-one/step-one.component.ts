@@ -20,7 +20,6 @@ export class StepOneComponent implements OnInit {
   fileReadResult: any;
   paramsFileList: ParamsFile;
   reNumProteinUrl: string;
-  formData = new FormData();
   restHost = environment.REST_HOST;
   blob = new Blob();
   other_ligand: any;
@@ -161,6 +160,7 @@ export class StepOneComponent implements OnInit {
   }
 
   uploadFile() {
+    const formData = new FormData();
     const form = this.stepOneForm.value;
      // 将other_params整理成‘[A,215,MG,A,218,HOH]'
     const otherLigands = this.otherLigands.value;
@@ -172,17 +172,17 @@ export class StepOneComponent implements OnInit {
     const otherLigandsValue = otherLigandsArray.join(',');
     // console.log('otherValue:', otherLigandsValue); //todo delete
     // 使用es6 FormData 传文件
-    this.formData.append('job_name', form.job_name.trim());
-    this.formData.append('other_ligands', otherLigandsValue);
-    this.formData.append('res_chain', form.res_chain.trim());
-    this.formData.append('res_ligand_chain', form.res_ligand_chain.trim());
-    this.formData.append('res_ligand_ID', form.res_ligand_ID.trim());
-    this.formData.append('res_ligand_name', form.res_ligand_name.trim());
-    this.formData.append('design_ligand_name', form.design_ligand_name.trim());
-    this.formData.append('protein', this.proteinFile);
-    this.formData.append('ligand', this.ligandFile);
-    // console.log('formData:', this.formData); // todo delete;
-    this.rest.postData('first-step/', this.formData)
+    formData.append('job_name', form.job_name.trim());
+    formData.append('other_ligands', otherLigandsValue);
+    formData.append('res_chain', form.res_chain.trim());
+    formData.append('res_ligand_chain', form.res_ligand_chain.trim());
+    formData.append('res_ligand_ID', form.res_ligand_ID.trim());
+    formData.append('res_ligand_name', form.res_ligand_name.trim());
+    formData.append('design_ligand_name', form.design_ligand_name.trim());
+    formData.append('protein', this.proteinFile);
+    formData.append('ligand', this.ligandFile);
+    // console.log('formData:', formData); // todo delete;
+    this.rest.postData('first-step/', formData)
       .subscribe(data => {
         // this.paramsFileList = data;
         // console.log('fileList:', data); // todo delete

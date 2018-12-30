@@ -13,7 +13,6 @@ export class StepThreeComponent implements OnInit {
   stepThreeForm: FormGroup;
   paramsFileList: ParamsFile;
   cstFile: File;
-  formData = new FormData();
   constructor(private rest: RestService,
               private fb: FormBuilder,
               private router: Router) { }
@@ -55,11 +54,12 @@ export class StepThreeComponent implements OnInit {
   }
 
   uploadForm() {
+    const formData = new FormData();
     const form = this.stepThreeForm.value;
-    this.formData.append('job_name', form.job_name.trim());
-    this.formData.append('cst_file', this.cstFile);
+    formData.append('job_name', form.job_name.trim());
+    formData.append('cst_file', this.cstFile);
 
-    this.rest.postData('third-step/', this.formData)
+    this.rest.postData('third-step/', formData)
       .subscribe(data => {
           // this.paramsFileList = data;
           console.log(data);
