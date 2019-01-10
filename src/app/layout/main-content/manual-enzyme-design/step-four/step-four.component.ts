@@ -64,8 +64,8 @@ export class StepFourComponent implements OnInit {
   uploadForm() {
     const form = this.stepFourForm.value;
     const formData = new FormData();
-    const designRange = form.range1.trim() + ';' + form.range2.trim() + ';' + form.range3.trim() + ';'
-      + form.range4.trim() + ';' + form.range5.trim();
+    const designRange = form.range1 + ';' + form.range2 + ';' + form.range3 + ';'
+      + form.range4 + ';' + form.range5;
     formData.append('job_name', form.job_name.trim());
     formData.append('design_mini_range', designRange);
     formData.append('user_email', form.user_email.trim());
