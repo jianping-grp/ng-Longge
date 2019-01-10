@@ -66,7 +66,7 @@ export class StepThreeComponent implements OnInit {
           alert('Submitted Successfully!');
         },
         error => {
-          console.log(error.message);
+          // console.log(error.message);
           alert('Submitted Failed!');
         },
         () => {

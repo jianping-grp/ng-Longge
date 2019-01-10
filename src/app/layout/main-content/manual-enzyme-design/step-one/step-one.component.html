@@ -135,9 +135,9 @@
           <nz-form-label [nzSpan]="7" nzRequired>Ligand {{i + 1}}</nz-form-label>
           <nz-form-control [nzSpan]="9">
             <nz-input-group>
-              <input nz-input formControlName="params1" class="group-input">
-              <input nz-input formControlName="params2" class="group-input">
-              <input nz-input formControlName="params3" class="group-input">
+              <input nz-input formControlName="params1" class="group-input" placeholder="chain name">
+              <input nz-input formControlName="params2" class="group-input" placeholder="residue sequence id">
+              <input nz-input formControlName="params3" class="group-input" placeholder="residue name">
             </nz-input-group>
             <nz-form-explain *ngIf="ligand.touched&&ligand.invalid">
               Please input the complete ligand parameters!

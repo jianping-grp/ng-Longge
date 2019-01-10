@@ -14,3 +14,8 @@
 .input-explain-color{
   color: #f5222d;
 }
+
+.group-input {
+  width: 30%;
+  margin: 0 5px
+}

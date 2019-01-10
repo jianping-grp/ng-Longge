@@ -40,7 +40,7 @@ export class StepFiveResultComponent implements OnInit {
   private _getOutFile() {
     this.rest.getFileText(this.paramsFileList['design_ligand_name_out'])
       .subscribe(data => {
-        this.designLigandOutFileText = data;
+        this.designLigandOutFileText = data.replace(/.+/g, '<br/>');
       });
   }
 

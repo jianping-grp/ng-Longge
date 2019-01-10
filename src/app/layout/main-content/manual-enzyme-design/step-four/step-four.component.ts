@@ -19,7 +19,7 @@ export class StepFourComponent implements OnInit {
 
   ngOnInit() {
     this.stepFourForm = this.fb.group({
-      job_name: ['', Validators.required],
+      job_name: ['', [Validators.required]],
       // design_mini_range: ['', Validators.required],
       range1: ['', [Validators.required]],
       range2: ['', [Validators.required]],
@@ -51,9 +51,11 @@ export class StepFourComponent implements OnInit {
         this.stepFourForm.controls[i].markAsDirty();
         this.stepFourForm.controls[i].updateValueAndValidity();
       }
-    } else if (!this.cstFile || !this.isCstFile(this.cstFile)) {
-      alert('Please input cst file!');  // cst 文件可以不传;
-    } else {
+    }
+    // else if (!this.cstFile || !this.isCstFile(this.cstFile)) {
+    //   alert('Please input cst file!');  // cst 文件可以不传;
+    // }
+    else {
       this.uploadForm();
     }
   }

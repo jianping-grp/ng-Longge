@@ -17,7 +17,7 @@ export class StepFiveComponent implements OnInit {
               private fb: FormBuilder,
               private router: Router) {
     this.setParams = {
-      params: ['', Validators.required]
+      params: ['', [Validators.required]]
     };
   }
 

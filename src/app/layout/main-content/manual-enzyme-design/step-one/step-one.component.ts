@@ -37,11 +37,11 @@ export class StepOneComponent implements OnInit {
   ngOnInit() {
     this.stepOneForm = this.fb.group({
       job_name: ['', [Validators.required]],
-      res_chain: ['', Validators.required],
-      res_ligand_chain: ['', Validators.required],
-      res_ligand_ID: ['', Validators.required],
-      res_ligand_name: ['', Validators.required],
-      design_ligand_name: ['', Validators.required],
+      res_chain: ['', [Validators.required]],
+      res_ligand_chain: ['', [Validators.required]],
+      res_ligand_ID: ['', [Validators.required]],
+      res_ligand_name: ['', [Validators.required]],
+      design_ligand_name: ['ABC', [Validators.required]],
       other_ligands: this.fb.array([this.fb.group(this.other_ligand)]),
     });
   }
@@ -166,7 +166,11 @@ export class StepOneComponent implements OnInit {
     const otherLigands = this.otherLigands.value;
     const otherLigandsArray = [];
     for (const ligand of otherLigands) {
-      otherLigandsArray.push(ligand['params1'].trim(), ligand['params2'].trim(), ligand['params3'].trim());
+      otherLigandsArray.push(
+        this.stringToTitleCase(ligand['params1'].trim()),
+        this.stringToTitleCase(ligand['params2'].trim()),
+        this.stringToTitleCase( ligand['params3'].trim())
+        );
       // console.log('otherArray:', otherLigandsArray); // todo delete
     }
     const otherLigandsValue = otherLigandsArray.join(',');
@@ -198,6 +202,10 @@ export class StepOneComponent implements OnInit {
               jobName: form.job_name
             }});
         });
+  }
+
+  stringToTitleCase(str: string): string {
+    return str.substring(0, 1).toUpperCase() + str.substring(1);
   }
 
 }
