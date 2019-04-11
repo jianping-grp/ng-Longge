@@ -13,6 +13,7 @@ import {
 } from '@angular/material';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {LitemolModule} from './litemol/litemol.module';
+import {JsmeModule} from './jsme/jsme.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {LitemolModule} from './litemol/litemol.module';
     ReactiveFormsModule,
     NgZorroAntdModule.forRoot(),
     LitemolModule,
+    JsmeModule,
     MatToolbarModule,
     MatSidenavModule,
     MatSelectModule,
@@ -50,6 +52,7 @@ import {LitemolModule} from './litemol/litemol.module';
     FormsModule,
     ReactiveFormsModule,
     LitemolModule,
+    JsmeModule,
     NgZorroAntdModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -75,7 +78,6 @@ import {LitemolModule} from './litemol/litemol.module';
     MatSlideToggleModule,
     MatSliderModule,
   ],
-  declarations: [
-  ]
+  declarations: []
 })
 export class SharedModule { }

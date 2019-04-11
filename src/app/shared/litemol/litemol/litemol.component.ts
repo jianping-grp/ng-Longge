@@ -51,9 +51,9 @@ export class LitemolComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     // this.fileRead();
-    console.log(this.plugin);
-    console.log(LiteMol);
-    console.log('id:', this.targetId, 'url:', this.url, 'changes:', changes); // todo delete
+    // console.log(this.plugin);
+    // console.log(LiteMol);
+    // console.log('id:', this.targetId, 'url:', this.url, 'changes:', changes); // todo delete
     // instead of url, it is possible to use
     // data: "string" or BinaryString or ArrayBuffer (for BinaryCIF)
     const body = {

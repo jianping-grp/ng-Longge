@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'manual-design',
     loadChildren: './layout/main-content/manual-enzyme-design/manual-enzyme-design.module#ManualEnzymeDesignModule'
+  },
+  {
+    path: 'new-enzyme-design',
+    loadChildren: './layout/main-content/new-enzyme-design/new-enzyme-design.module#NewEnzymeDesignModule'
   }
 ];
 
