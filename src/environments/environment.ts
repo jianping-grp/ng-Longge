@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  REST_HOST: 'http://192.168.1.113:8005'
+  // REST_HOST: 'http://192.168.1.113:8005'
+  REST_HOST: 'http://localhost:8009'
 };
 
 /*

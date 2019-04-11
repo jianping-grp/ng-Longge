@@ -144,16 +144,16 @@ export class StepTwoComponent implements OnInit {
         constrainValue += '-' + constrain['atom_A1'].trim() + ':' + constrain['atom_A2'].trim() + ':' + constrain['atom_A3'].trim();
       }
       constrainValue += '-' + constrain['at1'] + ':' + constrain['at2'] + ':' + constrain['at3'] + ':'
-        + constrain['at4'] + ':' + constrain['at5'] + ':' + constrain['at6'] + ':'
+        + constrain['at4'] + ':' + constrain['at5'] + ':' + constrain['at6'] + '-'
         + constrain['fc1'] + ':' + constrain['fc2'] + ':' + constrain['fc3'] + ':'
-        + constrain['fc4'] + ':' + constrain['fc5'] + ':' + constrain['fc6'] + ':'
+        + constrain['fc4'] + ':' + constrain['fc5'] + ':' + constrain['fc6'] + '-'
         + constrain['ppc1'] + ':' + constrain['ppc2'] + ':' + constrain['ppc3'] + ':'
-        + constrain['ppc4'] + ':' + constrain['ppc5'] + ':' + constrain['ppc6'] + ':'
+        + constrain['ppc4'] + ':' + constrain['ppc5'] + ':' + constrain['ppc6'] + '-'
         + constrain['shsm1'] + ':' + constrain['shsm2'] + ':' + constrain['shsm3'] + ':'
-        + constrain['shsm4'] + ':' + constrain['shsm5'] + ':' + constrain['shsm6'] + ':';
+        + constrain['shsm4'] + ':' + constrain['shsm5'] + ':' + constrain['shsm6'] + ',';
     }
     // console.log('constrainValue:', constrainValue);
-    // 移除最后一个冒号
+    // 移除最后一个"-"
     constrainValue = constrainValue.slice(0, -1);
     console.log('constrainValue:', constrainValue);
     formData.append('job_name', form.job_name.trim());

@@ -27,6 +27,7 @@ export class StepThreeResultComponent implements OnInit {
       const jobName = params.get('jobName');
       this.rest.getData(`params/?filter{job_name}=${jobName}`)
         .subscribe(data => {
+          console.log('three-step-data:', data);
           this.paramsFileList = data['submit_paramters'][0];
         });
       // console.log('thisParams:', this.paramsFileList);

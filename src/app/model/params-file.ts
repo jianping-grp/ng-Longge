@@ -18,4 +18,5 @@ export interface ParamsFile {
   job_name?: string;
   user_email?: string;
   UM_pdb_count?: number;
+  filtered_designed_ligandname_out?: string;
 }

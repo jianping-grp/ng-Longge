@@ -8,4 +8,6 @@
   min-height: 300px;
   max-height: 500px;
   overflow-y: auto;
+  overflow-x: auto;
+  white-space: pre-wrap;
 }

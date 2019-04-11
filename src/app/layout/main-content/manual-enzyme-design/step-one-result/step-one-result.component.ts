@@ -45,7 +45,8 @@ export class StepOneResultComponent implements OnInit {
     this.rest.getFileText(this.paramsFileList['protein_renumber_file'])
       .subscribe(data => {
         // data 为文件文本内容
-        this.reNumProteinFileText = data.replace(/.+/g, '<br/>');
+        this.reNumProteinFileText = data;
+        console.log('>>>>', this.reNumProteinFileText);
       });
   }
 
@@ -53,7 +54,7 @@ export class StepOneResultComponent implements OnInit {
     this.rest.getFileText(this.paramsFileList['ligand_params_file'])
       .subscribe(data => {
         // data 为文件文本内容
-        this.ligandParamsFileText = data.replace(/.+/g, '<br/>');
+        this.ligandParamsFileText = data;
       });
   }
 
@@ -61,7 +62,7 @@ export class StepOneResultComponent implements OnInit {
     this.rest.getFileText(this.paramsFileList['inputs_pos_file'])
       .subscribe(data => {
         // data 为文件文本内容
-        this.inputPosFile = data.replace(/.+/g, '<br/>');
+        this.inputPosFile = data;
       });
   }
 

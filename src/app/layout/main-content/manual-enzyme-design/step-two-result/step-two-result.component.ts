@@ -39,7 +39,7 @@ export class StepTwoResultComponent implements OnInit {
   private _getCstFile() {
     this.rest.getFileText(this.paramsFileList['match_cst_file'])
       .subscribe(data => {
-        this.matchCstFileText = data.replace(/.+/g, '<br/>');
+        this.matchCstFileText = data;
       });
   }
 
